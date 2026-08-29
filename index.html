@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Más enchufes para nuestro liceo</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(180deg,#dff4ff 0%,#fff1f6 45%,#fff7d8 100%);
+  color:#263238;
+  line-height:1.55;
+}
+header{
+  background:rgba(255,255,255,.94);
+  border-bottom:4px solid #ffd166;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+nav{
+  width:min(1000px,92%);
+  margin:auto;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:22px;
+  padding:16px 8px;
+}
+nav a{
+  color:#222;
+  text-decoration:none;
+  font-weight:bold;
+  font-family:Georgia,"Times New Roman",serif;
+}
+nav a{
+  padding:7px 10px;
+  border-radius:12px;
+}
+nav a:nth-child(1),nav a:nth-child(5){background:#d7f1ff}
+nav a:nth-child(2),nav a:nth-child(6){background:#ffe0eb}
+nav a:nth-child(3),nav a:nth-child(7){background:#fff0b8}
+nav a:nth-child(4){background:#dff3df}
+nav a:hover{transform:translateY(-2px);text-decoration:none}
+main{
+  width:min(1000px,92%);
+  margin:auto;
+}
+.hero,.section{
+  background:rgba(255,255,255,.94);
+  border-radius:18px;
+  margin:24px 0;
+  overflow:hidden;
+  border:2px solid rgba(255,255,255,.9);
+  box-shadow:0 8px 22px rgba(64,91,110,.10);
+}
+.hero-visual{
+  height:235px;
+  background:
+    radial-gradient(circle at 15% 25%,#ffd166 0 18px,transparent 19px),
+    radial-gradient(circle at 87% 30%,#ff8fab 0 22px,transparent 23px),
+    radial-gradient(circle at 78% 80%,#8bd3dd 0 17px,transparent 18px),
+    linear-gradient(135deg,#bde7f5 0%,#e6f5fb 50%,#ffe2ec 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.socket{
+  width:170px;height:170px;border-radius:50%;
+  background:#fffdf8;border:12px solid #a8cfe0;
+  position:relative;box-shadow:0 6px 16px rgba(0,0,0,.12);
+}
+.socket:before,.socket:after{
+  content:"";position:absolute;top:56px;width:19px;height:31px;
+  background:#555;border-radius:8px;
+}
+.socket:before{left:42px}.socket:after{right:42px}
+.socket span{
+  position:absolute;width:16px;height:16px;border-radius:50%;
+  background:#555;left:50%;bottom:31px;transform:translateX(-50%);
+}
+.hero-content{padding:28px;text-align:center}
+.hero h1{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:34px;margin:0 0 10px;
+}
+.hero p{max-width:720px;margin:0 auto 18px}
+.btn{
+  border:0;background:#ffd166;padding:11px 18px;border-radius:14px;
+  font-weight:bold;cursor:pointer;
+}
+.btn:hover{background:#ffbd4a}
+.section{padding:28px}
+.section h2{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:27px;text-align:center;margin:0 0 8px;
+}
+.subtitle{text-align:center;color:#59656d;margin:0 0 24px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{
+  background:#fff;border:2px solid #e4edf2;border-radius:16px;
+  padding:18px;
+  box-shadow:0 5px 12px rgba(70,90,105,.06);
+}
+.card.center{text-align:center}
+.icon{font-size:30px;margin-bottom:8px}
+.tag{
+  display:inline-block;background:#fff0b8;border-radius:999px;
+  padding:6px 10px;font-size:13px;font-weight:bold;margin:4px;
+}
+.price{
+  display:inline-block;margin-top:8px;background:#eeeeee;border-radius:10px;
+  padding:7px 10px;font-weight:bold;
+}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{
+  border:0;border-radius:16px;padding:14px;background:#ffd9e5;
+  font-weight:bold;cursor:pointer;
+}
+.option:nth-child(odd){background:#aec1d0}
+.result{
+  display:none;margin-top:18px;background:#fff9df;border:2px dashed #ffd166;border-radius:14px;padding:18px;
+}
+.bar{margin:13px 0}
+.bar-head{display:flex;justify-content:space-between;margin-bottom:5px}
+.track{height:17px;border-radius:999px;background:#ddd;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,#63c5da,#8ed081);border-radius:999px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.step{
+  background:linear-gradient(145deg,#d9f3fb,#e9f8e8);border-radius:14px;padding:18px;text-align:center
+}
+.step b{
+  display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;
+  background:#ff8fab;color:white;margin-bottom:8px
+}
+.rules{max-width:760px;margin:0 auto;padding-left:24px}
+.rules li{margin:10px 0}
+.form{display:grid;gap:12px;max-width:620px;margin:auto}
+input,textarea{
+  width:100%;padding:12px;border:1px solid #bcc9d2;border-radius:10px;
+  font-size:15px
+}
+textarea{min-height:100px;resize:vertical}
+.notice{
+  display:none;background:#e5efe8;border-radius:10px;padding:12px;text-align:center;
+  color:#355b3e;font-weight:bold
+}
+.mini-nav{
+  display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:15px
+}
+.mini-nav button{
+  background:#dff3df;border:0;border-radius:12px;padding:9px 12px;cursor:pointer;font-weight:bold
+}
+.resource-box{
+  display:none;margin-top:16px;background:white;border:1px solid #d0dae1;
+  border-radius:12px;padding:18px
+}
+.footer{
+  text-align:center;padding:25px 10px 38px;color:#536069;font-size:14px
+}
+
+.card:nth-child(3n+1){border-top:5px solid #63c5da}
+.card:nth-child(3n+2){border-top:5px solid #ff8fab}
+.card:nth-child(3n+3){border-top:5px solid #ffd166}
+.section:nth-of-type(4n+1) h2{color:#397b95}
+.section:nth-of-type(4n+2) h2{color:#b95372}
+.section:nth-of-type(4n+3) h2{color:#54875b}
+.section:nth-of-type(4n) h2{color:#a96f21}
+
+@media(max-width:700px){
+  .grid-2,.grid-3,.options,.steps{grid-template-columns:1fr}
+  nav{gap:14px;font-size:14px}
+  .hero h1{font-size:28px}
+}
+
+/* Banner animado */
+.animated-hero{
+  position:relative;
+  min-height:420px;
+  background:linear-gradient(135deg,#b9e3ff 0%,#d7ecff 50%,#c7e6fb 100%);
+  overflow:hidden;
+}
+.hero-school{
+  position:relative;z-index:3;min-height:420px;
+  display:grid;grid-template-columns:1.05fr .95fr;
+  align-items:center;padding:42px 6%;
+}
+.hero-copy{text-align:left;max-width:520px}
+.hero-label{
+  display:inline-block;background:rgba(255,255,255,.68);
+  padding:7px 11px;border-radius:999px;font-weight:bold;color:#49677c;
+  margin-bottom:12px;
+}
+.animated-hero .hero-copy h1{
+  text-align:left;font-size:clamp(38px,5vw,62px);line-height:1.02;
+  color:#17304d;margin:5px 0 16px;letter-spacing:-1.5px;
+}
+.animated-hero .hero-copy h1 span{color:#e45f8b}
+.animated-hero .hero-copy p{
+  font-size:19px;max-width:470px;margin:0 0 22px;color:#29455f
+}
+.hero-btn{background:#ffd15c;box-shadow:0 5px 0 rgba(201,151,28,.22)}
+.hero-plug-area{
+  position:relative;min-height:320px;display:flex;align-items:center;justify-content:center;
+}
+.big-socket{
+  width:190px;height:190px;border:15px solid #e3e0da;
+  box-shadow:0 18px 28px rgba(53,88,111,.18),inset 0 0 0 2px white;
+  z-index:2;
+}
+.cable{
+  position:absolute;width:180px;height:100px;border-bottom:16px solid #f7f7f7;
+  border-right:16px solid #f7f7f7;border-radius:0 0 70px 0;
+  right:0;bottom:32px;transform:rotate(7deg);
+  filter:drop-shadow(0 5px 4px rgba(0,0,0,.08));
+}
+.sticker{
+  position:absolute;right:2%;top:7%;background:#ff8fb1;color:white;
+  padding:13px 17px;border-radius:26px 18px 30px 18px;
+  transform:rotate(6deg);font-weight:bold;text-align:center;font-size:14px;
+  animation:stickerFloat 4.8s ease-in-out infinite;
+}
+.hero-bubbles span{position:absolute;display:block;border-radius:50%;z-index:1;opacity:.9}
+.b1{width:105px;height:105px;background:#ffd04f;left:-25px;top:-20px;animation:float1 7s ease-in-out infinite}
+.b2{width:58px;height:58px;background:#ff8fb1;left:36%;top:18px;animation:float2 6s ease-in-out infinite}
+.b3{width:48px;height:48px;background:#63b7ed;left:57%;top:70px;animation:float1 8s ease-in-out infinite}
+.b4{width:38px;height:38px;background:#a76de0;right:9%;bottom:55px;animation:float2 7.5s ease-in-out infinite}
+.b5{width:28px;height:28px;background:#62c776;left:47%;bottom:60px;animation:float1 5.5s ease-in-out infinite}
+.b6{width:22px;height:22px;background:#ffcc3e;left:43%;top:155px;animation:float2 5s ease-in-out infinite}
+.b7{width:72px;height:72px;background:#77c4f2;left:3%;bottom:65px;animation:float1 6.5s ease-in-out infinite}
+.spark{position:absolute;color:white;font-size:25px;z-index:4;animation:blink 2.8s ease-in-out infinite}
+.s1{left:12%;top:22%}.s2{left:19%;bottom:20%;font-size:36px}.s3{right:8%;bottom:23%}
+@keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(12px,-14px)}}
+@keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-10px,12px)}}
+@keyframes stickerFloat{0%,100%{transform:rotate(6deg) translateY(0)}50%{transform:rotate(4deg) translateY(-8px)}}
+@keyframes blink{0%,100%{opacity:.45;transform:scale(.9)}50%{opacity:1;transform:scale(1.15)}}
+@media(max-width:700px){
+  .hero-school{grid-template-columns:1fr;padding:34px 24px}
+  .hero-copy{text-align:center;margin:auto}
+  .animated-hero .hero-copy h1{text-align:center}
+  .hero-plug-area{min-height:260px}
+  .sticker{right:0;top:0;font-size:12px}
+  .big-socket{transform:scale(.8)}
+  .cable{right:-70px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-bubbles span,.sticker,.spark{animation:none!important}
+}
+
+
+.nav-icon{
+  display:inline-block;
+  margin-right:5px;
+  font-size:1.05em;
+  vertical-align:-1px;
+}
+nav a{
+  display:inline-flex;
+  align-items:center;
+  gap:2px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<nav>
+  <a href="#inicio"><span class="nav-icon">🏠</span> Inicio</a>
+  <a href="#quienes"><span class="nav-icon">👥</span> Quiénes somos</a>
+  <a href="#servicios"><span class="nav-icon">🔌</span> Servicios</a>
+  <a href="#recursos"><span class="nav-icon">📚</span> Recursos</a>
+  <a href="#tecnicos"><span class="nav-icon">🛠️</span> Técnicos</a>
+  <a href="#politicas"><span class="nav-icon">✅</span> Políticas</a>
+  <a href="#contacto"><span class="nav-icon">💬</span> Mensajes</a>
+</nav>
+</header>
+
+<main>
+
+<section class="hero animated-hero" id="inicio">
+  <div class="hero-bubbles" aria-hidden="true">
+    <span class="bubble b1"></span><span class="bubble b2"></span>
+    <span class="bubble b3"></span><span class="bubble b4"></span>
+    <span class="bubble b5"></span><span class="bubble b6"></span>
+    <span class="bubble b7"></span>
+  </div>
+
+  <div class="hero-school">
+    <div class="hero-copy">
+      <div class="hero-label">⚡ Proyecto escolar · 1.º medio</div>
+      <h1>Más enchufes,<br><span>más oportunidades</span></h1>
+      <p>Un liceo conectado es un liceo que aprende, se comunica y crece.</p>
+      <button class="btn hero-btn" onclick="document.getElementById('encuesta').scrollIntoView()">🔌 Ver nuestra encuesta</button>
+    </div>
+
+    <div class="hero-plug-area" aria-label="Ilustración de enchufe">
+      <div class="spark s1">✦</div><div class="spark s2">⚡</div><div class="spark s3">✦</div>
+      <div class="socket big-socket">
+        <span></span>
+      </div>
+      <div class="cable"></div>
+      <div class="sticker">💗 Pequeños cambios<br>pueden hacer una<br>gran diferencia :)</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="quienes">
+  <h2>Quiénes somos</h2>
+  <p class="subtitle">Creadores, motivación y propósito del sitio.</p>
+  <div class="grid-2">
+    <div class="card">
+      <h3>👧 Las creadoras</h3>
+      <p>
+        Somos estudiantes de 1.º medio y realizamos este proyecto pensando en una situación que vemos
+        en nuestro propio liceo.
+      </p>
+      <p><strong>Integrantes:</strong></p>
+      <p>🌸 Gabriela Herrera<br>
+      🌼 Kimberly Herrera<br>
+      🌷 Victoria Aguilera</p>
+      <p><strong>Curso:</strong> 1.º medio</p>
+    </div>
+    <div class="card">
+      <h3>💡 Nuestra motivación</h3>
+      <p>
+        Nos dimos cuenta de que el celular se usa para comunicarse con la familia, realizar trabajos
+        y otras actividades. Por eso quisimos saber si la falta de enchufes era realmente un problema.
+      </p>
+      <p><strong>Nuestro propósito:</strong> mostrar los resultados de la encuesta y proponer una solución sencilla y segura.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="encuesta">
+  <h2>📊 Encuesta realizada</h2>
+  <p class="subtitle">Respondieron 8 estudiantes del liceo. Presiona una pregunta para ver sus resultados.</p>
+  <div class="options">
+    <button class="option" onclick="showSurvey('mas')">¿Se necesitan más enchufes?</button>
+    <button class="option" onclick="showSurvey('lugar')">¿Dónde hacen más falta?</button>
+    <button class="option" onclick="showSurvey('bateria')">¿Se quedan sin batería?</button>
+    <button class="option" onclick="showSurvey('familia')">¿Afecta la comunicación?</button>
+  </div>
+  <div class="result" id="surveyResult">
+    <h3 id="surveyTitle"></h3>
+    <div id="surveyBars"></div>
+    <p id="surveyText"></p>
+  </div>
+</section>
+
+<section class="section" id="servicios">
+  <h2>🌈 Servicios que entrega nuestra página</h2>
+  <p class="subtitle">Descripción de lo que puede encontrar una persona que visite el sitio.</p>
+  <div class="grid-3">
+    <div class="card center">
+      <div class="icon">📊</div>
+      <h3>Resultados de la encuesta</h3>
+      <p>Permite conocer la opinión de los estudiantes sobre los enchufes del liceo.</p>
+    </div>
+    <div class="card center">
+      <div class="icon">🔌</div>
+      <h3>Propuesta de puntos de carga</h3>
+      <p>Muestra en qué lugares sería más útil contar con nuevos enchufes.</p>
+    </div>
+    <div class="card center">
+      <div class="icon">📘</div>
+      <h3>Guía de uso seguro</h3>
+      <p>Entrega consejos y reglas para cuidar los enchufes, cargadores y espacios comunes.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="recursos">
+  <h2>💡 Recursos y contenidos</h2>
+  <p class="subtitle">En esta sección incluimos consejos, una pequeña guía y un tutorial.</p>
+
+  <div class="mini-nav">
+    <button onclick="showResource('consejos')">Consejos</button>
+    <button onclick="showResource('tutorial')">Tutorial</button>
+    <button onclick="showResource('guia')">Guía rápida</button>
+  </div>
+
+  <div id="consejos" class="resource-box">
+    <h3>💡 Consejos para cuidar la batería</h3>
+    <ul>
+      <li>Bajar el brillo de la pantalla cuando no sea necesario tenerlo alto.</li>
+      <li>Cerrar aplicaciones que no se estén utilizando.</li>
+      <li>Activar el ahorro de batería si queda poca carga.</li>
+      <li>Usar cargadores en buen estado.</li>
+    </ul>
+  </div>
+
+  <div id="tutorial" class="resource-box">
+    <h3>🧭 Tutorial: ¿Cómo usar un punto de carga de forma segura?</h3>
+    <div class="steps">
+      <div class="step"><b>1</b><br><strong>Revisar</strong><br>Comprueba que el cargador y el cable estén en buen estado.</div>
+      <div class="step"><b>2</b><br><strong>Conectar</strong><br>Enchufa sin forzar y deja el cable en un lugar donde nadie tropiece.</div>
+      <div class="step"><b>3</b><br><strong>Desconectar</strong><br>Cuando termines, retira el cargador con cuidado y deja libre el punto.</div>
+    </div>
+  </div>
+
+  <div id="guia" class="resource-box">
+    <h3>📋 Guía rápida</h3>
+    <p><strong>Antes de cargar:</strong> revisa el estado del cable.</p>
+    <p><strong>Mientras cargas:</strong> no dejes el celular en lugares donde pueda caerse.</p>
+    <p><strong>Al terminar:</strong> desconecta el cargador y deja el espacio disponible para otra persona.</p>
+  </div>
+</section>
+
+<section class="section" id="tecnicos">
+  <h2>Sección técnica</h2>
+  <p class="subtitle">Nuestra idea no significa instalar enchufes por cuenta propia.</p>
+  <div class="grid-2">
+    <div class="card">
+      <h3>¿Dónde se necesitan más?</h3>
+      <p>
+        Según la encuesta, el patio fue el lugar más elegido. Las salas de clases también aparecieron
+        como una necesidad.
+      </p>
+      <span class="tag">Patio 62,5%</span>
+      <span class="tag">Sala de clases 37,5%</span>
+    </div>
+    <div class="card">
+      <h3>¿Quién debe instalar?</h3>
+      <p>
+        Cualquier nuevo enchufe o punto de carga debe ser revisado e instalado por una persona
+        capacitada, para que sea seguro y no produzca riesgos eléctricos.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="politicas">
+  <h2>✅ Políticas de uso y funcionamiento</h2>
+  <p class="subtitle">Reglas para que el servicio sea seguro y pueda ser utilizado por todos.</p>
+  <ol class="rules">
+    <li><strong>Compartir los enchufes:</strong> no ocupar un punto de carga más tiempo del necesario.</li>
+    <li><strong>Usar cargadores en buen estado:</strong> no conectar cables cortados o dañados.</li>
+    <li><strong>Cuidar los espacios:</strong> evitar dejar cables atravesados en lugares de paso.</li>
+    <li><strong>No forzar los enchufes:</strong> conectar y desconectar los cargadores con cuidado.</li>
+    <li><strong>Respetar las indicaciones del liceo:</strong> utilizar solamente los lugares autorizados.</li>
+    <li><strong>Dejar el espacio limpio:</strong> retirar cargadores, papeles u objetos después de usarlo.</li>
+  </ol>
+</section>
+
+<section class="section" id="contacto">
+  <h2>💬 Formulario de contacto</h2>
+  <p class="subtitle">Déjanos tu comentario, propuesta u observación.</p>
+  <form class="form" id="contactForm">
+    <input type="text" id="nombre" placeholder="Nombre" required>
+    <input type="text" id="curso" placeholder="Curso" required>
+    <input type="email" id="correo" placeholder="Correo" required>
+    <textarea id="comentario" placeholder="Comentarios y/o observaciones" required></textarea>
+    <button class="btn" type="submit">Enviar mensaje</button>
+    <div id="notice" class="notice">¡Gracias! Tu comentario fue registrado en esta demostración.</div>
+  </form>
+</section>
+
+</main>
+
+<div class="footer">
+  Proyecto escolar de 1.º medio · Servicio digital sobre puntos de carga en el liceo
+</div>
+
+<script>
+const surveys={
+  mas:{
+    title:"¿Crees que en el liceo necesitan más enchufes?",
+    data:[["Sí, muchos",50],["Sí, algunos",12.5],["Muy pocos",12.5],["No, no faltan",25]],
+    text:"El 50% respondió que se necesitan muchos más enchufes."
+  },
+  lugar:{
+    title:"¿En qué lugar del liceo crees que se necesitan más enchufes?",
+    data:[["En el patio",62.5],["En la sala de clases",37.5]],
+    text:"El patio fue el lugar más elegido por los estudiantes."
+  },
+  bateria:{
+    title:"¿Te has quedado sin batería en tu celular durante clases?",
+    data:[["Muchas veces",37.5],["Algunas veces",37.5],["Rara vez",12.5],["Nunca",12.5]],
+    text:"El 75% respondió muchas veces o algunas veces."
+  },
+  familia:{
+    title:"¿La falta de enchufes afecta tu comunicación con tu familia?",
+    data:[["Mucho",50],["Algo",25],["Poco",25],["Nada",0]],
+    text:"El 75% considera que la falta de batería afecta mucho o algo su comunicación con la familia."
+  }
+};
+
+function showSurvey(key){
+  const item=surveys[key];
+  const box=document.getElementById("surveyResult");
+  document.getElementById("surveyTitle").textContent=item.title;
+  const bars=document.getElementById("surveyBars");
+  bars.innerHTML="";
+  item.data.forEach(([label,value])=>{
+    const div=document.createElement("div");
+    div.className="bar";
+    div.innerHTML='<div class="bar-head"><span>'+label+'</span><strong>'+String(value).replace(".",",")+'%</strong></div><div class="track"><div class="fill" style="width:'+value+'%"></div></div>';
+    bars.appendChild(div);
+  });
+  document.getElementById("surveyText").textContent=item.text;
+  box.style.display="block";
+}
+
+function showResource(id){
+  document.querySelectorAll(".resource-box").forEach(el=>el.style.display="none");
+  document.getElementById(id).style.display="block";
+}
+
+document.getElementById("contactForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  document.getElementById("notice").style.display="block";
+  this.reset();
+});
+</script>
+
+</body>
+</html>
