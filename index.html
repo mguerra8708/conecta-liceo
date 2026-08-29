@@ -287,96 +287,20 @@ nav a{
   .nav-link{font-size:13px;padding:6px 8px}
 }
 
-
-/* Menú responsive */
-.mobile-nav-wrap{
-  width:min(1000px,92%);
-  margin:auto;
-  position:relative;
-}
-.main-nav{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:12px;
-  padding:14px 8px;
-}
-.menu-toggle{
-  display:none;
-  border:0;
-  background:#ffffff;
-  color:#24323a;
-  border-radius:12px;
-  padding:9px 13px;
-  font-weight:800;
-  align-items:center;
-  gap:8px;
-  box-shadow:0 3px 10px rgba(40,60,75,.08);
-}
-.hamburger{font-size:20px;line-height:1}
-
-@media(max-width:700px) and (orientation:portrait){
-  header{
-    position:sticky;
-    top:0;
-    z-index:50;
-    padding:8px 0;
-  }
-  .mobile-nav-wrap{
-    width:94%;
-  }
-  .menu-toggle{
-    display:inline-flex;
-  }
-  .main-nav{
-    display:none;
-    position:absolute;
-    top:48px;
-    left:0;
-    right:0;
-    background:rgba(255,255,255,.98);
-    border:1px solid #d8e1e7;
-    border-radius:16px;
-    padding:10px;
-    box-shadow:0 12px 28px rgba(32,49,61,.16);
-    max-height:70vh;
-    overflow:auto;
-    flex-direction:column;
-    align-items:stretch;
-    gap:7px;
-  }
-  .main-nav.open{
-    display:flex;
-  }
-  .nav-link{
-    width:100%;
-    justify-content:flex-start;
-    font-size:14px;
-    padding:10px 12px;
-  }
-}
-
 </style>
 </head>
 <body>
 
-
 <header>
-  <div class="mobile-nav-wrap">
-    <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav">
-      <span class="hamburger">☰</span>
-      <span>Menú</span>
-    </button>
-    <nav id="mainNav" class="main-nav">
-      <button type="button" class="nav-link" onclick="goToSection('inicio')"><span class="nav-icon">🏠</span> Inicio</button>
-      <button type="button" class="nav-link" onclick="goToSection('quienes')"><span class="nav-icon">👥</span> Quiénes somos</button>
-      <button type="button" class="nav-link" onclick="goToSection('servicios')"><span class="nav-icon">🔌</span> Servicios</button>
-      <button type="button" class="nav-link" onclick="goToSection('recursos')"><span class="nav-icon">📚</span> Recursos</button>
-      <button type="button" class="nav-link" onclick="goToSection('tecnicos')"><span class="nav-icon">🛠️</span> Técnicos</button>
-      <button type="button" class="nav-link" onclick="goToSection('politicas')"><span class="nav-icon">✅</span> Políticas</button>
-      <button type="button" class="nav-link" onclick="goToSection('contacto')"><span class="nav-icon">💬</span> Mensajes</button>
-    </nav>
-  </div>
+<nav>
+  <button type="button" class="nav-link" onclick="goToSection('inicio')"><span class="nav-icon">🏠</span> Inicio</button>
+  <button type="button" class="nav-link" onclick="goToSection('quienes')"><span class="nav-icon">👥</span> Quiénes somos</button>
+  <button type="button" class="nav-link" onclick="goToSection('servicios')"><span class="nav-icon">🔌</span> Servicios</button>
+  <button type="button" class="nav-link" onclick="goToSection('recursos')"><span class="nav-icon">📚</span> Recursos</button>
+  <button type="button" class="nav-link" onclick="goToSection('tecnicos')"><span class="nav-icon">🛠️</span> Técnicos</button>
+  <button type="button" class="nav-link" onclick="goToSection('politicas')"><span class="nav-icon">✅</span> Políticas</button>
+  <button type="button" class="nav-link" onclick="goToSection('contacto')"><span class="nav-icon">💬</span> Mensajes</button>
+</nav>
 </header>
 
 <main>
@@ -625,37 +549,6 @@ document.getElementById("contactForm").addEventListener("submit",function(e){
   document.getElementById("notice").style.display="block";
   this.reset();
 });
-
-const menuToggle = document.getElementById('menuToggle');
-const mainNav = document.getElementById('mainNav');
-
-if(menuToggle && mainNav){
-  menuToggle.addEventListener('click', function(){
-    const open = mainNav.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    menuToggle.querySelector('.hamburger').textContent = open ? '✕' : '☰';
-  });
-
-  mainNav.querySelectorAll('.nav-link').forEach(btn => {
-    btn.addEventListener('click', function(){
-      if(window.matchMedia('(max-width:700px) and (orientation:portrait)').matches){
-        mainNav.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded','false');
-        menuToggle.querySelector('.hamburger').textContent='☰';
-      }
-    });
-  });
-
-  document.addEventListener('click', function(e){
-    if(window.matchMedia('(max-width:700px) and (orientation:portrait)').matches &&
-       !mainNav.contains(e.target) && !menuToggle.contains(e.target)){
-      mainNav.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded','false');
-      menuToggle.querySelector('.hamburger').textContent='☰';
-    }
-  });
-}
-
 </script>
 
 </body>
