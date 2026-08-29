@@ -263,19 +263,43 @@ nav a{
   align-items:center;
   gap:2px;
 }
+
+.nav-link{
+  font:inherit;
+  font-weight:bold;
+  color:#222;
+  border:0;
+  cursor:pointer;
+  padding:7px 10px;
+  border-radius:12px;
+  background:#fff;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  transition:transform .18s ease,filter .18s ease;
+}
+.nav-link:nth-child(1),.nav-link:nth-child(5){background:#d7f1ff}
+.nav-link:nth-child(2),.nav-link:nth-child(6){background:#ffe0eb}
+.nav-link:nth-child(3),.nav-link:nth-child(7){background:#fff0b8}
+.nav-link:nth-child(4){background:#dff3df}
+.nav-link:hover{transform:translateY(-2px);filter:brightness(.98)}
+@media(max-width:700px){
+  .nav-link{font-size:13px;padding:6px 8px}
+}
+
 </style>
 </head>
 <body>
 
 <header>
 <nav>
-  <a href="#inicio"><span class="nav-icon">🏠</span> Inicio</a>
-  <a href="#quienes"><span class="nav-icon">👥</span> Quiénes somos</a>
-  <a href="#servicios"><span class="nav-icon">🔌</span> Servicios</a>
-  <a href="#recursos"><span class="nav-icon">📚</span> Recursos</a>
-  <a href="#tecnicos"><span class="nav-icon">🛠️</span> Técnicos</a>
-  <a href="#politicas"><span class="nav-icon">✅</span> Políticas</a>
-  <a href="#contacto"><span class="nav-icon">💬</span> Mensajes</a>
+  <button type="button" class="nav-link" onclick="goToSection('inicio')"><span class="nav-icon">🏠</span> Inicio</button>
+  <button type="button" class="nav-link" onclick="goToSection('quienes')"><span class="nav-icon">👥</span> Quiénes somos</button>
+  <button type="button" class="nav-link" onclick="goToSection('servicios')"><span class="nav-icon">🔌</span> Servicios</button>
+  <button type="button" class="nav-link" onclick="goToSection('recursos')"><span class="nav-icon">📚</span> Recursos</button>
+  <button type="button" class="nav-link" onclick="goToSection('tecnicos')"><span class="nav-icon">🛠️</span> Técnicos</button>
+  <button type="button" class="nav-link" onclick="goToSection('politicas')"><span class="nav-icon">✅</span> Políticas</button>
+  <button type="button" class="nav-link" onclick="goToSection('contacto')"><span class="nav-icon">💬</span> Mensajes</button>
 </nav>
 </header>
 
@@ -466,6 +490,16 @@ nav a{
 </div>
 
 <script>
+
+function goToSection(id){
+  const section = document.getElementById(id);
+  if(!section) return;
+  const header = document.querySelector('header');
+  const offset = header ? header.offsetHeight + 10 : 10;
+  const top = section.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({top: top, behavior:'smooth'});
+}
+
 const surveys={
   mas:{
     title:"¿Crees que en el liceo necesitan más enchufes?",
